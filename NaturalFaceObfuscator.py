@@ -60,7 +60,7 @@ class UnNormalize(object):
 
 
 ITR = 200
-
+ct = 1
 for file in glob.glob("CroppedImages/*.png"): #have images you want to obscure in this folder, or change folder name
     if ("cloaked" not in file):
         print(file)
@@ -88,5 +88,6 @@ for file in glob.glob("CroppedImages/*.png"): #have images you want to obscure i
         unorm = UnNormalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))
         modified = modified.squeeze(0)
         save_image(unorm(modified), "{}_natural_cloaked.png".format(ct))
+        ct = ct + 1
 
 
