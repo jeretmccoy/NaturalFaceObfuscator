@@ -28,12 +28,12 @@ tIm = tIm.view(1,3,224,224)
 tIm.requires_grad = True
 
 
-def nu(mImg):
+def nu(mImg): #may be redefined as some other obfuscation metric
   fakeness = torch.maximum(model(mImg)[0,0] + torch.tensor(2.5), torch.tensor(0.0))
   return fakeness
 
 
-def rho(mImg):
+def rho(mImg): #you may redefine as some other similarity metric
   targetFeatures = featureExtractor(tIm)['avgpool'].squeeze(0).squeeze(1).squeeze(1)
   modFeatures = featureExtractor(mImg)['avgpool'].squeeze(0).squeeze(1).squeeze(1)
   df = torch.sqrt(torch.sum(torch.square(targetFeatures - modFeatures)))
